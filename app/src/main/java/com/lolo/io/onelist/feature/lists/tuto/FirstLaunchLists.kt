@@ -5,8 +5,9 @@ import android.content.Context
 import com.lolo.io.onelist.R
 import com.lolo.io.onelist.core.model.Item
 import com.lolo.io.onelist.core.model.ItemList
+import javax.inject.Inject
 
-class FirstLaunchLists(val application: Application) {
+class FirstLaunchLists @Inject constructor(val application: Application) {
 
     val context get() = application
     private fun firstLaunchListTutorial() = ItemList(

@@ -23,10 +23,12 @@ import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 import updateOne
 import java.io.FileNotFoundException
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.coroutineContext
 
-
-class OneListRepository(
+@Singleton
+class OneListRepository @Inject constructor(
     private val preferences: SharedPreferencesHelper,
     private val dao: ItemListDao,
     private val fileAccess: FileAccess

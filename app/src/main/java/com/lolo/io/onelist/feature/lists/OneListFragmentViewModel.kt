@@ -17,6 +17,7 @@ import com.lolo.io.onelist.core.model.ItemList
 import com.lolo.io.onelist.core.ui.util.UIString
 import com.lolo.io.onelist.feature.lists.tuto.FirstLaunchLists
 import com.lolo.io.onelist.feature.lists.utils.toStringForShare
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,8 +29,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OneListFragmentViewModel(
+@HiltViewModel
+class OneListFragmentViewModel @Inject constructor(
     private val firstLaunchLists: FirstLaunchLists,
     private val useCases: OneListUseCases,
     private val preferences: SharedPreferencesHelper

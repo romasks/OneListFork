@@ -24,8 +24,9 @@ import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 import java.io.FileNotFoundException
 import java.io.IOException
+import javax.inject.Inject
 
-class FileAccess(
+class FileAccess @Inject constructor(
     val app: Application,
 ) {
     private val coroutineIOScope = CoroutineScope(Dispatchers.IO)

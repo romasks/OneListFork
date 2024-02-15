@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -64,16 +65,15 @@ import com.lolo.io.onelist.feature.lists.lists_adapters.ListsAdapter
 import com.lolo.io.onelist.feature.lists.lists_adapters.ListsCallbacks
 import com.lolo.io.onelist.feature.settings.SettingsFragment
 import com.lolo.io.onelist.feature.settings.showReleaseNote
+import dagger.hilt.android.AndroidEntryPoint
 import ifNotEmpty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class OneListFragment : Fragment(), ListsCallbacks, ItemsCallbacks,
     MainActivity.OnDispatchTouchEvent {
 
@@ -85,8 +85,7 @@ class OneListFragment : Fragment(), ListsCallbacks, ItemsCallbacks,
     private val binding: FragmentOneListBinding
         get() = _binding!!
 
-    private val viewModel
-            by lazy { getViewModel<OneListFragmentViewModel>() }
+    private val viewModel by viewModels<OneListFragmentViewModel>()
 
     private val _fragmentAllListsFinalInstance = mutableListOf<ItemList>()
 
@@ -104,7 +103,8 @@ class OneListFragment : Fragment(), ListsCallbacks, ItemsCallbacks,
     private val isAddCommentShown
         get() = binding.addCommentEditText.height > 0
 
-    private val updateHelper: UpdateHelper by inject()
+    @Inject
+    lateinit var updateHelper: UpdateHelper
 
 
     override fun onAttach(context: Context) {
